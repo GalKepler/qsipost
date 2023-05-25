@@ -1447,14 +1447,14 @@ files = [
 
 [[package]]
 name = "looseversion"
-version = "1.1.2"
+version = "1.2.0"
 description = "Version numbering for anarchists and software realists"
 category = "main"
 optional = false
-python-versions = ">=3"
+python-versions = "*"
 files = [
-    {file = "looseversion-1.1.2-py3-none-any.whl", hash = "sha256:9f5b29d9a230f7fd9ef9275b729d6454a03b4a8d5b6e1622d1ca9860ad415c9e"},
-    {file = "looseversion-1.1.2.tar.gz", hash = "sha256:94d80bdbd0b6d57c11b886147ba1601f7d1531571621b81933b34537cbe469ad"},
+    {file = "looseversion-1.2.0-py2.py3-none-any.whl", hash = "sha256:0b30eaca26506135c1109dbed582384f8503dee8fcfe07b85fd949f69f077977"},
+    {file = "looseversion-1.2.0.tar.gz", hash = "sha256:c64e71c0b29030683b4ea75aee431db2d25c4e6e533590e52129f1d9e51de204"},
 ]
 
 [[package]]
@@ -3901,4 +3901,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "01989d4cfdfa1f41d487197b7b6cbefd0315e8ecc0edf0d4dc62f720257ef3f7"
+content-hash = "06a026ee38feeedf215f16542ab07f416d181a2dbe7c701af595d35027a0389a"
