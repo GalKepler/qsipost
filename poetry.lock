@@ -1953,13 +1953,14 @@ tests = ["codecov", "pytest", "pytest-cov"]
 
 [[package]]
 name = "niworkflows"
-version = "1.7.9"
+version = "1.8.0"
 description = "NeuroImaging Workflows provides processing tools for magnetic resonance images of the brain."
 category = "main"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "niworkflows-1.7.9.tar.gz", hash = "sha256:c42312488ba41352475d16bffea8710638f1df22ad22bf59c96f1e1c74e8969a"},
+    {file = "niworkflows-1.8.0-py3-none-any.whl", hash = "sha256:e48c9b57899caf14466f6f7f0b8eec3b011a4ed2bd1179d6f5ee7152f8a11eee"},
+    {file = "niworkflows-1.8.0.tar.gz", hash = "sha256:63b909c27cfaf4d3ca365a786580a56b0653070b4332e475937c5a8c0fc90ba4"},
 ]
 
 [package.dependencies]
@@ -1975,7 +1976,7 @@ numpy = "*"
 packaging = "*"
 pandas = "*"
 pybids = ">=0.15.1"
-PyYAML = "*"
+pyyaml = "*"
 scikit-image = "*"
 scipy = "*"
 seaborn = "*"
@@ -1985,9 +1986,9 @@ traits = "<6.4"
 transforms3d = "*"
 
 [package.extras]
-all = ["coverage (>=5.2.1)", "flake8 (>=3.7.0)", "furo (>=2021.10.09,<2021.11.0)", "pydot (>=1.2.3)", "pydotplus", "pyntcloud", "pytest (>=4.4)", "pytest-cov", "pytest-env", "pytest-xdist (>=1.28)", "pytest-xvfb", "sphinx (>=4.0,<5.0)", "sphinxcontrib-apidoc", "sphinxcontrib-napoleon"]
+all = ["niworkflows[doc,pointclouds,style,tests]"]
 doc = ["furo (>=2021.10.09,<2021.11.0)", "pydot (>=1.2.3)", "pydotplus", "sphinx (>=4.0,<5.0)", "sphinxcontrib-apidoc", "sphinxcontrib-napoleon"]
-docs = ["furo (>=2021.10.09,<2021.11.0)", "pydot (>=1.2.3)", "pydotplus", "sphinx (>=4.0,<5.0)", "sphinxcontrib-apidoc", "sphinxcontrib-napoleon"]
+docs = ["niworkflows[doc]"]
 pointclouds = ["pyntcloud"]
 style = ["flake8 (>=3.7.0)"]
 tests = ["coverage (>=5.2.1)", "pytest (>=4.4)", "pytest-cov", "pytest-env", "pytest-xdist (>=1.28)", "pytest-xvfb"]
@@ -3901,4 +3902,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "01989d4cfdfa1f41d487197b7b6cbefd0315e8ecc0edf0d4dc62f720257ef3f7"
+content-hash = "7e0e98ba3446e102e71d47b5623a77d8388af40a7f4bedae7f7b3191f8099464"
