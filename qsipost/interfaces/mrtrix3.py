@@ -671,6 +671,73 @@ class TCKSift(MRTrix3Base):
         return outputs
 
 
+class TCKSift2InputSpec(MRTrix3BaseInputSpec):
+    in_tracks = File(
+        exists=True,
+        argstr="%s",
+        position=-3,
+        mandatory=True,
+        desc="input track file.",
+    )
+    in_fod = File(
+        exists=True,
+        argstr="%s",
+        position=-2,
+        mandatory=True,
+        desc="input image containing the FODs.",
+    )
+    out_weights = File(
+        "sift_weights.txt",
+        argstr="%s",
+        position=-1,
+        usedefault=True,
+        desc="output text file containing the weighting factor for each streamline.",
+    )
+    act_file = File(
+        exists=True,
+        argstr="-act %s",
+        desc="Anatomically-Constrained Tractography image",
+    )
+    fd_scale_gm = traits.Bool(
+        argstr="-fd_scale_gm",
+        desc="heuristically downsize the fibre density estimates based on the presence of GM in the voxel.",
+    )
+
+
+class TCKSift2OutputSpec(TraitedSpec):
+    out_weights = File(
+        argstr="%s",
+        desc="output track file containing the selected streamlines.",
+    )
+
+
+class TCKSift2(MRTrix3Base):
+    """
+    Filter a whole-brain fibre-tracking data set such that the streamline densities match the FOD lobe integrals
+
+
+    Example
+    -------
+
+    >>> import nipype.interfaces.mrtrix3 as mrt
+    >>> sift = mrt.TCKSift()
+    >>> sift.inputs.in_tracks = 'tracks.tck'
+    >>> sift.inputs.in_fod = 'fod.mif'
+    >>> sift.cmdline                               # doctest: +ELLIPSIS
+    'tcksift tracks.tck fod.mif sift.tck'
+    >>> sift.run()                                 # doctest: +SKIP
+    """
+
+    _cmd = "tcksift2"
+    input_spec = TCKSiftInputSpec
+    output_spec = TCKSiftOutputSpec
+
+    def _list_outputs(self):
+        outputs = self.output_spec().get()
+        outputs["out_file"] = op.abspath(self.inputs.out_file)
+        return outputs
+
+
 class BuildConnectomeInputSpec(MRTrix3BaseInputSpec):
     in_tracts = File(
         exists=True,
@@ -700,6 +767,11 @@ class BuildConnectomeInputSpec(MRTrix3BaseInputSpec):
         argstr="-scale_%s",
         desc="scale the contribution of each streamline segment by its length, the inverse length, or the inverse of the sum of the volumes of the nodes it passes through.",
         usedefault=False,
+    )
+    tck_weights_in = File(
+        exists=True,
+        argstr="-tck_weights_in %s",
+        desc="specify a text scalar file containing a weight for each streamline in the input track file.",
     )
     # scale_length = traits.Bool(
     #     argstr="-scale_length",

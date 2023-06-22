@@ -318,7 +318,7 @@ class execution(_Config):
     """An existing path to the dataset, which must be an output of QSIPrep."""
     qsiprep_database_dir = None
     """Path to the directory containing SQLite database indices for the input QSIPrep dataset."""
-    reset_database = False
+    reset_database = True
     """Reset the SQLite database."""
     debug = []
     """Debug mode(s)."""
@@ -376,8 +376,7 @@ class execution(_Config):
             cls._layout = QSIPREPLayout(
                 str(cls.qsiprep_dir),
                 database_path=_db_path,
-                reset_database=(cls.qsiprep_database_dir is None)
-                or (cls.reset_database),
+                reset_database=cls.reset_database or (cls.qsiprep_database_dir is None),
             )
             cls.qsiprep_database_dir = _db_path
         cls.layout = cls._layout

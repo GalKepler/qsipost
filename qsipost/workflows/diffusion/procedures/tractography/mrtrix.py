@@ -74,7 +74,7 @@ def init_mrtrix_tractography_wf(
         niu.IdentityInterface(
             fields=[
                 "unfiltered_tracts",
-                "sift_tracts",
+                "sift_weights",
             ]
         ),
         name="outputnode",
@@ -263,33 +263,33 @@ def init_mrtrix_tractography_wf(
     if config.workflow.do_sift_filtering:
         in_tracts = "sift_tracts"
         tcksift_kwargs = {}
-        if config.workflow.sift_term_number:
-            tcksift_kwargs["term_number"] = config.workflow.sift_term_number
-        elif config.workflow.sift_term_ratio:
-            tcksift_kwargs["term_ratio"] = config.workflow.sift_term_ratio
-        else:
-            raise ValueError(
-                """
-                Either sift_term_number or sift_term_ratio must be specified 
-                if sift_filtering is set to True.
-                """
-            )
+        # if config.workflow.sift_term_number:
+        #     tcksift_kwargs["term_number"] = config.workflow.sift_term_number
+        # elif config.workflow.sift_term_ratio:
+        #     tcksift_kwargs["term_ratio"] = config.workflow.sift_term_ratio
+        # else:
+        #     raise ValueError(
+        #         """
+        #         Either sift_term_number or sift_term_ratio must be specified
+        #         if sift_filtering is set to True.
+        #         """
+        #     )
         tcksift_node = pe.Node(
-            mrt.TCKSift(
+            mrt.TCKSift2(
                 nthreads=config.nipype.omp_nthreads,
                 **tcksift_kwargs,
                 fd_scale_gm=True,
             ),
-            name="tcksift",
+            name="tcksift2",
         )
         ds_tcksift_node = pe.Node(
             DerivativesDataSink(
-                suffix="tracts",
-                extension=".tck",
-                desc="sift",
+                suffix="weights",
+                extension=".txt",
+                desc="sift2",
                 reconstruction="mrtrix",
             ),
-            name="ds_sift_tracts",
+            name="ds_sift_weights",
             run_without_submitting=True,
         )
         workflow.connect(
@@ -317,16 +317,9 @@ def init_mrtrix_tractography_wf(
                 ),
                 (
                     tcksift_node,
-                    outputnode,
-                    [
-                        ("out_file", "tck_file"),
-                    ],
-                ),
-                (
-                    tcksift_node,
                     ds_tcksift_node,
                     [
-                        ("out_file", "in_file"),
+                        ("out_weights", "in_file"),
                     ],
                 ),
                 (
@@ -341,7 +334,7 @@ def init_mrtrix_tractography_wf(
                     ds_tcksift_node,
                     outputnode,
                     [
-                        ("out_file", "sift_tracts"),
+                        ("out_file", "sift_weights"),
                     ],
                 ),
             ]

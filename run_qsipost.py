@@ -20,7 +20,8 @@ def get_or_create_database(
 
 
 if __name__ == "__main__":
-    path = "/media/groot/Minerva/ConnectomePlasticity/MRI/derivatives"
+    # path = "/media/groot/Minerva/ConnectomePlasticity/MRI/derivatives_dwipa/"
+    path = "/media/groot/Minerva/TheBase/MRI/derivatives_dwipa/"
     # database_file = (
     #     "/media/groot/Minerva/ConnectomePlasticity/MRI/derivatives/qsiprep_layout.db"
     # )

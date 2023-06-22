@@ -31,6 +31,7 @@ def init_connectome_wf(name: str = "connectome_wf") -> pe.Workflow:
                 "base_directory",
                 "atlas_name",
                 "in_tracts",
+                "sift_weights",
                 "in_parc",
             ]
         ),
@@ -86,6 +87,7 @@ def init_connectome_wf(name: str = "connectome_wf") -> pe.Workflow:
                     connectome,
                     [
                         ("in_tracts", "in_tracts"),
+                        ("sift_weights", "tck_weights_in"),
                         ("in_parc", "in_nodes"),
                     ],
                 ),
