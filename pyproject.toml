@@ -41,7 +41,7 @@ bids = "^0.0"
 nipype = "^1.8.6"
 nibabel = "^5.1.0"
 pandas = "^2.0.1"
-niworkflows = "^1.7.9"
+niworkflows = "^1.8.1"
 identify = "^2.5.24"
 
 [tool.poetry.dev-dependencies]
